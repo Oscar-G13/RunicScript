@@ -7,7 +7,8 @@ pub fn interpret(ast: ASTNode) -> String {
                 "cast" => cast_spell(arguments),
                 "summon" => summon_creature(arguments),
                 "enchant" => enchant_item(arguments),
-                _ => format!("Unknown command: '{}'", command),
+                "scry" => scry(arguments),
+                _ => format!("The runes for '{}' are unfamiliar.", command),
             }
         }
     }
@@ -15,26 +16,33 @@ pub fn interpret(ast: ASTNode) -> String {
 
 fn cast_spell(args: Vec<String>) -> String {
     if args.is_empty() {
-        return "Error: No spell specified".to_string();
+        return "Error: No spell runes provided".to_string();
     }
     match args[0].as_str() {
-        "fireball" => "You cast a fiery ball of magic!".to_string(),
-        "frostbolt" => "You launch a bolt of icy magic!".to_string(),
-        "heal" => "A warm, healing light emanates from your hands.".to_string(),
-        _ => format!("You attempt to cast {}, but nothing happens.", args[0]),
+        "fireball" => "A sphere of flame erupts from your fingertips!".to_string(),
+        "frostbolt" => "Crystals of ice form and launch from your palm!".to_string(),
+        "heal" => "Soothing energies flow from your hands, mending wounds.".to_string(),
+        _ => format!("You trace the runes for {}, but the magic fizzles.", args[0]),
     }
 }
 
 fn summon_creature(args: Vec<String>) -> String {
     if args.is_empty() {
-        return "Error: No creature specified".to_string();
+        return "Error: No creature specified in the summoning circle".to_string();
     }
-    format!("You summon a {}!", args[0])
+    format!("A mystical portal opens, and a {} steps forth!", args[0])
 }
 
 fn enchant_item(args: Vec<String>) -> String {
     if args.len() < 2 {
-        return "Error: Enchant requires an item and an enchantment".to_string();
+        return "Error: Enchantment requires both an item and a magical property".to_string();
     }
-    format!("You enchant the {} with {}.", args[0], args[1])
+    format!("Arcane energies swirl around the {}, imbuing it with the power of {}.", args[0], args[1])
+}
+
+fn scry(args: Vec<String>) -> String {
+    if args.is_empty() {
+        return "You gaze into your crystal ball, but see only swirling mists.".to_string();
+    }
+    format!("As you focus on {}, visions begin to form in your mind's eye.", args.join(" "))
 }
