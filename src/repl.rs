@@ -1,9 +1,9 @@
 use std::io::{self, Write};
 use crate::lexer;
 use crate::parser;
-use crate::interpreter;
+use crate::interpreter::Interpreter;
 
-pub fn start_repl() {
+pub fn start_repl(interpreter: &mut Interpreter) {
     println!("Welcome to the RunicScript Arcane Console!");
     println!("Speak your incantations, or whisper 'vanish' to close the portal.");
 
@@ -25,7 +25,7 @@ pub fn start_repl() {
         
         match parser::parse(tokens) {
             Ok(ast) => {
-                let result = interpreter::interpret(ast);
+                let result = interpreter.interpret(ast);
                 println!("✨ {}", result);
             }
             Err(e) => println!("🌋 Arcane error: {}", e),
