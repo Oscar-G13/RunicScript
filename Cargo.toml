@@ -1,0 +1,8 @@
+[package]
+name = "runicscript"
+version = "0.1.0"
+edition = "2021"
+description = "An efficient, magic-themed programming language"
+authors = ["Oscar G <Oscar@OscorpIndustries.io"]
+
+[dependencies]
